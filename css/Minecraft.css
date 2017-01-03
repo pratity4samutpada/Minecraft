@@ -1,4 +1,6 @@
-
+body{
+    overflow-x: scroll;
+}
 
 .cell{
     border:1px solid black;
@@ -6,15 +8,24 @@
     width:30px;
     display: inline-block;
 
+
 }
 
 .row{
     line-height: 0;
+
+
+
 }
 
 #grid{
     display:inline-block;
     background-color: deepskyblue;
+
+
+
+
+
 }
 
 .dirt{
@@ -49,4 +60,3 @@
 
 
 
-.
