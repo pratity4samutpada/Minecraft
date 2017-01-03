@@ -43,21 +43,25 @@ var Minecraft = {
     },
 
     renderGrid: function () {
-
+            //Changes the grid according to new changes in matrix.
 
     },
 
     pickTool: function () {
+
     },
 
     changeCell: function () {
+        //Change cell according to the currently selected tool(pickaxe, shovel, etc.) or resource (grass, tree, etc.)
     },
 
-    makeStartMatrix: function () {
-                Minecraft.makeStartTerrain();
+    makeStartMatrix: function () { //I put the terrain generation in a separate function. Now we can write functions to make rocks and trees on top of the ground.
+                Minecraft.makeTerrain();
+                Minecraft.makeRocks();//Not yet written.
+                Minecraft.makeTrees();//Not yet written.
     },
 
-    makeStartTerrain: function(){
+    makeTerrain: function(){
         for (var i = Minecraft.matrix.length - 1; i >= 2 * (x / 3); i--) {
             for (var j = 0; j < Minecraft.matrix[i].length; j++) {
                 if (i === Minecraft.matrix.length - 1) { //bottom row is all dirt...(We should write it so that 1/5 of the bottom 1/3 is always dirt...).
@@ -66,9 +70,9 @@ var Minecraft = {
                 } else { //****This is how we randomize the terrain****
                     if (Minecraft.matrix[i + 1][j] == "dirt") { //if the cell below the current cell has dirt...
 
-                        var rand = Math.round(Math.random()); //generate a random num between 0 and 1...
+                        var rand = Math.round(Math.random()); //generate either 0 or 1...
 
-                        if (rand > 0 && i > 2 * (x / 3)) {     //and if the number is 1 and the row is not 1/3 of the matrix length...
+                        if (rand > 0 && i > 2 * (x / 3)) {     // if the number is 1 and the row is higher than 2/3 of the matrix...
 
                             Minecraft.matrix[i][j] = "dirt"; //put dirt in the current cell.
 
