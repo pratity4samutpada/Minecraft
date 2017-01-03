@@ -43,22 +43,19 @@ var Minecraft = {
     },
 
     renderGrid: function () {
-            //Changes the grid according to new changes in matrix.
+
 
     },
 
     pickTool: function () {
-
     },
 
     changeCell: function () {
-        //Change cell according to the currently selected tool(pickaxe, shovel, etc.) or resource (grass, tree, etc.)
     },
 
     makeStartMatrix: function () { //I put the terrain generation in a separate function. Now we can write functions to make rocks and trees on top of the ground.
                 Minecraft.makeTerrain();
-                Minecraft.makeRocks();//Not yet written.
-                Minecraft.makeTrees();//Not yet written.
+                
     },
 
     makeTerrain: function(){
