@@ -1,7 +1,7 @@
 
 
 .cell{
-    border:2px solid black;
+    border:1px solid black;
     height:30px;
     width:30px;
     display: inline-block;
@@ -16,3 +16,37 @@
     display:inline-block;
     background-color: deepskyblue;
 }
+
+.dirt{
+    background-image:url("../images/dirt.png");
+    background-size:cover;
+    background-repeat:no-repeat;
+}
+
+.grass{
+    background-image:url("../images/grass.png");
+    background-size:cover;
+    background-repeat:no-repeat;
+}
+
+.rock{
+    background-image:url("../images/rock.png");
+    background-size:cover;
+    background-repeat:no-repeat;
+}
+
+.leaf{
+    background-image:url("../images/leaf.png");
+    background-size:cover;
+    background-repeat:no-repeat;
+}
+
+.tree{
+    background-image:url("../images/tree.png");
+    background-size:cover;
+    background-repeat:no-repeat;
+}
+
+
+
+.
