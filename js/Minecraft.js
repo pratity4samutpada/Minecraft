@@ -72,7 +72,7 @@ var Minecraft = {
             if(i%27==0){
                 Minecraft.makeCloud2(i);
             }
-            if(i%13==0){
+            if(i%13==0) {
                 Minecraft.makeCloud3(i);
             }
         }
