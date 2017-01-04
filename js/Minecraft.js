@@ -1,6 +1,12 @@
 var Minecraft = {
 
     selected:"",
+    leaf:0,
+    tree:0,
+    rock:0,
+    dirt:0,
+    grass:0,
+    maxInventory:10,
 
     init: function (x, y) {
         Minecraft.drawGrid(x, y);
@@ -21,6 +27,7 @@ var Minecraft = {
                 var cell = $("<div/>");
                 cell.addClass("cell");
                 row.append(cell);
+                $(cell).click(Minecraft.changeCell);
             }
         }
     },
@@ -45,15 +52,82 @@ var Minecraft = {
 
     },
 
-    renderGrid: function () {
-
-
-    },
-
-    pickTool: function () {
-    },
-
     changeCell: function () {
+        if (Minecraft.selected == "axe"){
+            Minecraft.axe($(this));
+        }
+        if (Minecraft.selected == "shovel"){
+            Minecraft.shovel($(this));
+        }
+        if (Minecraft.selected == "pickaxe"){
+            Minecraft.pickaxe($(this));
+        }
+
+
+    },
+
+    axe: function(target){
+        if(target.hasClass("tree") || target.hasClass("leaf")){
+            Minecraft.matrix[target.data("i")][target.data("j")] = "";
+            if(target.hasClass("tree")){
+                target.removeClass("tree");
+                Minecraft.addInventory("tree");
+            }
+            if(target.hasClass("leaf")){
+                target.removeClass("leaf");
+                Minecraft.addInventory("leaf");
+            }
+
+        }else{
+            Minecraft.wrongTool(Minecraft.selected);
+        }
+    },
+
+    shovel: function(target){
+        if(target.hasClass("grass") || target.hasClass("dirt")){
+            Minecraft.matrix[target.data("i")][target.data("j")] = "";
+            if(target.hasClass("grass")){
+                target.removeClass("grass");
+                Minecraft.addInventory("grass");
+            }
+            if(target.hasClass("dirt")){
+                target.removeClass("dirt");
+                Minecraft.addInventory("dirt");
+            }
+
+        }else{
+            Minecraft.wrongTool(Minecraft.selected);
+        }
+
+    },
+
+    pickaxe: function(target){
+        if(target.hasClass("rock")){
+                Minecraft.matrix[target.data("i")][target.data("j")] = "";
+                    target.removeClass("rock");
+                    Minecraft.addInventory("rock");
+
+            }else{
+                Minecraft.wrongTool(Minecraft.selected);
+            }
+
+    },
+
+    addInventory: function(resource){
+      Minecraft[resource]++;
+        Minecraft.updateCounter(resource);
+    },
+
+    updateCounter: function(resource){
+        $('#'+resource+" span.counter").text(Minecraft[resource]);
+
+    },
+
+    wrongTool: function(tool){
+        $('#'+tool).toggleClass("selected").toggleClass("wrongTool");
+        setTimeout(function(){
+            $('#'+tool).toggleClass("selected").toggleClass("wrongTool");
+        },100);
     },
 
     makeStartMatrix: function () { //I put the terrain generation in a separate function. Now we can write functions to make rocks and trees on top of the ground.
@@ -88,21 +162,21 @@ var Minecraft = {
         // we create the "floor "
         for (var i = Minecraft.matrix.length - 1; i >= 2 * (x / 3); i--) {
             for (var j = 0; j < Minecraft.matrix[i].length; j++) {
-                if (i === Minecraft.matrix.length - 1 || i>=1.3*2/3*x) { //bottom row is all dirt...(We should write it so that 1/5 of the bottom 1/3 is always dirt...).
+                if (i === Minecraft.matrix.length - 1 || i>=1.3*2/3*x) {
                     Minecraft.matrix[i][j] = "dirt";
 
                 } else { //****This is how we randomize the terrain****
-                    if (Minecraft.matrix[i + 1][j] == "dirt") { //if the cell below the current cell has dirt...
+                    if (Minecraft.matrix[i + 1][j] == "dirt") {
 
-                        var rand = Math.round(Math.random()); //generate either 0 or 1...
+                        var rand = Math.round(Math.random());
 
-                        if (rand > 0 && i > 2 * (x / 3)) {     // if the number is 1 and the row is higher than 2/3 of the matrix...
+                        if (rand > 0 && i > 2 * (x / 3)) {
 
-                            Minecraft.matrix[i][j] = "dirt"; //put dirt in the current cell.
+                            Minecraft.matrix[i][j] = "dirt";
 
                         } else {
-                            Minecraft.matrix[i][j] = "grass"; //if the number is 0, make the current cell grass.
-                        }//The bug: if x is not divisible by 5, we still get dirt on the topmost row. It should always be grass.
+                            Minecraft.matrix[i][j] = "grass";
+                        }
 
                     }
                 }
@@ -264,6 +338,7 @@ var Minecraft = {
         for(var i = 0; i < resources.length; i++){
             var container = $("<div/>").addClass("toolContainer").appendTo(menu);
             var resource = $("<div/>").addClass(resources[i]+" tool").attr("id",resources[i]).appendTo(container);
+            var counter = $("<span/>").addClass("counter").text(0).appendTo(resource);
             resource.click(Minecraft.selectTool);
         }
 
