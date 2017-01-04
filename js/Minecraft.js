@@ -55,7 +55,7 @@ var Minecraft = {
 
     makeStartMatrix: function () { //I put the terrain generation in a separate function. Now we can write functions to make rocks and trees on top of the ground.
                 Minecraft.makeTerrain();
-                
+
     },
 
     makeTerrain: function(){
@@ -69,13 +69,15 @@ var Minecraft = {
 
                         var rand = Math.round(Math.random()); //generate either 0 or 1...
 
-                        if (rand > 0 && i > 2 * (x / 3)) {     // if the number is 1 and the row is higher than 2/3 of the matrix...
+                        if (rand > 0 && i > Math.floor(2 * (x / 3))) {     // if the number is 1 and the row is higher than 2/3 of the matrix...
 
                             Minecraft.matrix[i][j] = "dirt"; //put dirt in the current cell.
 
                         } else {
                             Minecraft.matrix[i][j] = "grass"; //if the number is 0, make the current cell grass.
-                        }//The bug: if x is not divisible by 5, we still get dirt on the topmost row. It should always be grass.
+                        }//The bug: if x is not divisible by 3, we still get dirt on the topmost row. It should always be grass.
+                        //The problem is with  "if (rand > 0 && i > Math.floor(2 * (x / 3)))"---If, for example,
+                        // x = 17, it will be harder to calculate 1/3 of the grid.
 
                     }
                 }
@@ -98,6 +100,6 @@ var Minecraft = {
 
 
 var x = 15;
-var y = 20;
+var y = 30;
 
 Minecraft.init(x, y);

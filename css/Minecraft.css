@@ -1,20 +1,15 @@
-body{
-    overflow-x: scroll;
-}
 
 .cell{
-    border:1px solid black;
     height:30px;
     width:30px;
     display: inline-block;
+    border: 1px solid white;
 
 
 }
 
 .row{
     line-height: 0;
-
-
 
 }
 
