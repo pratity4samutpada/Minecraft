@@ -1,10 +1,13 @@
 var Minecraft = {
 
+    selected:"",
+
     init: function (x, y) {
         Minecraft.drawGrid(x, y);
         Minecraft.buildMatrix(x, y);
         Minecraft.makeStartMatrix();
         Minecraft.renderStartMatrix();
+        Minecraft.populateMenu();
 
     },
 
@@ -54,16 +57,16 @@ var Minecraft = {
     },
 
     makeStartMatrix: function () { //I put the terrain generation in a separate function. Now we can write functions to make rocks and trees on top of the ground.
-                Minecraft.makeTerrain();
-        for(var i=2*(x/3);i<y-1;i++){
-            if(i%17==0){
+        Minecraft.makeTerrain();
+        for (var i = 2 * (x / 3); i < y - 1; i++) {
+            if (i % 17 == 0) {
                 Minecraft.makeTree(i);
 
             }
-            if(i%11==0){
+            if (i % 11 == 0) {
                 Minecraft.makeGrass(i);
             }
-            if(i%13==0){
+            if (i % 13 == 0) {
                 Minecraft.makeRock(i);
             }
             if(i%37==0){
@@ -248,21 +251,49 @@ var Minecraft = {
 
 
 
-
-    renderStartMatrix : function () {
-    for (var i = 0; i < Minecraft.matrix.length; i++) {
-        for (var j = 0; j < Minecraft.matrix[i].length; j++) {
-            Minecraft.cells.eq(i * y + j).addClass(Minecraft.matrix[i][j]);
+    populateMenu: function () {
+        var tools = ["axe","pickaxe","shovel"];
+        var resources = ["dirt","grass","rock","leaf","tree"];
+        var menu = $("#menu");
+        menu.addClass("active");
+        for(var i = 0; i < tools.length; i++){
+            var container = $("<div/>").addClass("toolContainer").appendTo(menu);
+            var tool = $("<div/>").addClass("tool").attr("id",tools[i]).appendTo(container);
+            tool.click(Minecraft.selectTool);
         }
-    }
+        for(var i = 0; i < resources.length; i++){
+            var container = $("<div/>").addClass("toolContainer").appendTo(menu);
+            var resource = $("<div/>").addClass(resources[i]+" tool").attr("id",resources[i]).appendTo(container);
+            resource.click(Minecraft.selectTool);
+        }
+
 
     },
+
+    selectTool: function(){
+        var targ =$(this);
+        Minecraft.selected = targ.attr("id");
+        $(".selected").removeClass("selected");
+        targ.addClass("selected");
+
+
+    },
+
+
+    renderStartMatrix: function () {
+        for (var i = 0; i < Minecraft.matrix.length; i++) {
+            for (var j = 0; j < Minecraft.matrix[i].length; j++) {
+                Minecraft.cells.eq(i * y + j).addClass(Minecraft.matrix[i][j]);
+            }
+        }
+
+    }
 
 
 };
 
 
 var x = 15;
-var y = 500;
+var y = 200;
 
 Minecraft.init(x, y);

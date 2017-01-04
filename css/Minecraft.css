@@ -1,31 +1,47 @@
-body{
-    overflow-x: scroll;
+html,body{
+    height:100%;
+    width:100%;
+    margin:0;
+    padding:0;
 }
 
 .cell{
-
     height:30px;
     width:30px;
     display: inline-block;
 
 
 }
+.cell:hover{
+    opacity:.7;
+    background-color:lightblue;
+}
+
 
 .row{
     line-height: 0;
 
+}
+
+#menu.active{
+    position:fixed;
+    height:150px;
+    width:80%;
+    right:0;
+    background-color: black;
+    z-index:10;
 
 
 }
+
 
 #grid{
     display:inline-block;
     background-color: deepskyblue;
     width: auto;
     overflow-x: scroll;
-    overflow-y: hidden;
     white-space: nowrap;
-
+    overflow-y:hidden;
 }
 .white{
     background-color: white;
@@ -62,5 +78,40 @@ body{
     background-repeat:no-repeat;
 }
 
+#axe{
+    background-image:url("../images/axe.png");
+    background-size:cover;
+    background-repeat:no-repeat;
+}
+
+#pickaxe{
+    background-image:url("../images/pickaxe.png");
+    background-size:cover;
+    background-repeat:no-repeat;
+}
+
+#shovel{
+    background-image:url("../images/shovel.png");
+    background-size:cover;
+    background-repeat:no-repeat;
+}
+
+.tool{
+    height:100px;
+    width:100px;
+    display: inline-block;
 
 
+}
+
+.selected{
+    background-color: blue;
+}
+
+.toolContainer{
+    height:110px;
+    width:110px;
+    display:inline-block;
+    background-color: white;
+
+}
