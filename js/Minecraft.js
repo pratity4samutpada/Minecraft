@@ -100,6 +100,6 @@ var Minecraft = {
 
 
 var x = 15;
-var y = 30;
+var y = 500;
 
 Minecraft.init(x, y);
