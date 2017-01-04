@@ -55,10 +55,19 @@ var Minecraft = {
 
     makeStartMatrix: function () { //I put the terrain generation in a separate function. Now we can write functions to make rocks and trees on top of the ground.
                 Minecraft.makeTerrain();
-                Minecraft.makeTree(y-6);
-                // Minecraft.makeGrass(5);
-                // Minecraft.makeRock(0);
-                // Minecraft.makeCloud();
+        for(var i=2*(x/3);i<y-1;i++){
+            if(i%17==0){
+                Minecraft.makeTree(i);
+            }
+            if(i%11==0){
+                Minecraft.makeGrass(i);
+            }
+            if(i%13==0){
+                Minecraft.makeRock(i);
+            }
+        }
+
+        Minecraft.makeCloud();
 
     },
 
@@ -98,8 +107,11 @@ var Minecraft = {
             if(Minecraft.matrix[treePlace][t]=="grass") {
                 test++;
             }
+            else if(Minecraft.matrix[treePlace][t]=="dirt"){
+                treePlace--;
+            }
             else{
-                t++;
+                treePlace++;
             }
         }
         treePlace--;
@@ -121,70 +133,85 @@ var Minecraft = {
     // then we can do more than 1 tree
 
     makeGrass:function(g){
-        var treePlace=2 *(x/3);
+
+        for(var treePlace=2 *(x/3);treePlace<x;treePlace++) {
             if (Minecraft.matrix[treePlace][g] == "grass") {
                 // Case 3
-                if (Minecraft.matrix[treePlace][g - 1] == "grass" && Minecraft.matrix[treePlace][g] == "grass" && Minecraft.matrix[treePlace][g + 1] == "grass" && Minecraft.matrix[treePlace - 1][g] != "tree" && Minecraft.matrix[treePlace - 1][g - 1] != "tree" && Minecraft.matrix[treePlace - 1][g + 1] != "tree") {
+                if (Minecraft.matrix[treePlace][g - 1] == "grass" && Minecraft.matrix[treePlace][g + 1] == "grass" && Minecraft.matrix[treePlace - 1][g] != "tree" && Minecraft.matrix[treePlace - 1][g - 1] != "tree" && Minecraft.matrix[treePlace - 1][g + 1] != "tree") {
                     Minecraft.matrix[treePlace - 1][g] = "leaf";
                     Minecraft.matrix[treePlace - 1][g + 1] = "leaf";
                     Minecraft.matrix[treePlace - 1][g - 1] = "leaf";
                     Minecraft.matrix[treePlace - 2][g] = "leaf";
-                    test++;
+
                 }
                 // Case 2 left
-                if (Minecraft.matrix[treePlace][g] == "grass" && Minecraft.matrix[treePlace][g + 1] == "grass" && Minecraft.matrix[treePlace - 1][g] != "tree" && Minecraft.matrix[treePlace - 1][g + 1] != "tree" && Minecraft.matrix[treePlace][g - 1] != "grass") {
+                if (Minecraft.matrix[treePlace][g + 1] == "grass" && Minecraft.matrix[treePlace - 1][g] != "tree" && Minecraft.matrix[treePlace - 1][g + 1] != "tree" && Minecraft.matrix[treePlace][g - 1] != "grass") {
                     Minecraft.matrix[treePlace - 1][g] = "leaf";
                     Minecraft.matrix[treePlace - 1][g + 1] = "leaf";
                     Minecraft.matrix[treePlace - 2][g] = "leaf";
-                    test++;
+
                 }
                 // Case 2 right
-                if (Minecraft.matrix[treePlace][g] == "grass" && Minecraft.matrix[treePlace][g - 1] == "grass" && Minecraft.matrix[treePlace - 1][g] != "tree" && Minecraft.matrix[treePlace - 1][g - 1] != "tree" && Minecraft.matrix[treePlace][g + 1] != "grass") {
+                if (Minecraft.matrix[treePlace][g - 1] == "grass" && Minecraft.matrix[treePlace - 1][g] != "tree" && Minecraft.matrix[treePlace - 1][g - 1] != "tree" && Minecraft.matrix[treePlace][g + 1] != "grass") {
                     Minecraft.matrix[treePlace - 1][g] = "leaf";
                     Minecraft.matrix[treePlace - 1][g - 1] = "leaf";
                     Minecraft.matrix[treePlace - 2][g] = "leaf";
-                    test++;
+
                 }
 
                 // Case 1
-                if (Minecraft.matrix[treePlace][g] == "grass" && Minecraft.matrix[treePlace][g - 1] != "grass" && Minecraft.matrix[treePlace][g + 1] != "grass" && Minecraft.matrix[treePlace - 1][g] != "tree") {
+                if (Minecraft.matrix[treePlace][g - 1] != "grass" && Minecraft.matrix[treePlace][g + 1] != "grass" && Minecraft.matrix[treePlace - 1][g] != "tree") {
                     Minecraft.matrix[treePlace - 1][g] = "leaf";
                     Minecraft.matrix[treePlace - 2][g] = "leaf";
-                    test++;
+
 
                 }
             }
 
-
+        }
 
     },
 
-    // makeRock:function(r){
-    //     var test=0;
-    //     var treePlace=2 *(x/3);
-    //     while(test==0){
-    //         if(Minecraft.matrix[treePlace][r-1]=="grass" && Minecraft.matrix[treePlace][r]=="grass") {
-    //             test++;
-    //         }
-    //         else{
-    //             r++;
-    //         }
-    //     }
-    //     Minecraft.matrix[treePlace-1][r]="rock";
-    //     Minecraft.matrix[treePlace-1][r-1]="rock";
-    // },
+    makeRock:function(r){
+        for(var treePlace=2 *(x/3);treePlace<x;treePlace++) {
+            if (Minecraft.matrix[treePlace][r] == "grass") {
+                // Case 2 left
+                if (Minecraft.matrix[treePlace][r + 1] == "grass" && Minecraft.matrix[treePlace - 1][r] != "tree" && Minecraft.matrix[treePlace - 1][r] != "leaf" && Minecraft.matrix[treePlace - 1][r + 1] != "tree"  && Minecraft.matrix[treePlace - 1][r + 1] != "leaf" && Minecraft.matrix[treePlace][r - 1] != "grass") {
+                    Minecraft.matrix[treePlace - 1][r] = "rock";
+                    Minecraft.matrix[treePlace - 1][r + 1] = "rock";
+                    // Minecraft.matrix[treePlace - 2][r] = "rock";
+                }
+                // Case 2 right
+                if (Minecraft.matrix[treePlace][r - 1] == "grass" && Minecraft.matrix[treePlace - 1][r] != "tree" && Minecraft.matrix[treePlace - 1][r] != "leaf" && Minecraft.matrix[treePlace - 1][r - 1] != "tree" && Minecraft.matrix[treePlace - 1][r - 1] != "leaf" && Minecraft.matrix[treePlace][r + 1] != "grass") {
+                    Minecraft.matrix[treePlace - 1][r] = "rock";
+                    Minecraft.matrix[treePlace - 1][r - 1] = "rock";
+                    // Minecraft.matrix[treePlace - 2][r] = "rock";
+                }
+                // Case 1
+                if (Minecraft.matrix[treePlace][r - 1] != "grass" && Minecraft.matrix[treePlace][r + 1] != "grass" && Minecraft.matrix[treePlace - 1][r] != "tree"  && Minecraft.matrix[treePlace - 1][r] != "leaf" && Minecraft.matrix[treePlace - 2][r] != "tree"  && Minecraft.matrix[treePlace - 2][r] != "leaf") {
+                    Minecraft.matrix[treePlace - 1][r] = "rock";
+                    Minecraft.matrix[treePlace - 2][r] = "rock";
+                }
+            }
+        }
 
-    // makeCloud:function(){
-    //     var cloudPlace=(x/3)-1;
-    //     var cloudHeight=y/3;
-    //     Minecraft.matrix[cloudPlace][cloudHeight]="white";
-    //     Minecraft.matrix[cloudPlace][cloudHeight+1]="white";
-    //     Minecraft.matrix[cloudPlace][cloudHeight+2]="white";
-    //     Minecraft.matrix[cloudPlace+1][cloudHeight+1]="white";
-    //     Minecraft.matrix[cloudPlace+1][cloudHeight+2]="white";
-    //     Minecraft.matrix[cloudPlace+1][cloudHeight+3]="white";
-    //
-    // },
+    },
+
+    makeCloud:function(){
+        // var cloudPlace=(x/3)-1;
+        // var cloudHeight=y/3;
+        // console.log("hwew=");
+        // if( Minecraft.matrix[cloudPlace][cloudHeight]!="tree" &&  Minecraft.matrix[cloudPlace][cloudHeight]!="leaf" && Minecraft.matrix[cloudPlace][cloudHeight]!="rock" && Minecraft.matrix[cloudPlace][cloudHeight+1]!="tree" &&  Minecraft.matrix[cloudPlace][cloudHeight+1]!="leaf" && Minecraft.matrix[cloudPlace][cloudHeight+1]!="rock" && Minecraft.matrix[cloudPlace][cloudHeight+2]!="tree" &&  Minecraft.matrix[cloudPlace][cloudHeight+2]!="leaf" && Minecraft.matrix[cloudPlace][cloudHeight+2]!="rock" && Minecraft.matrix[cloudPlace+1][cloudHeight+1]!="tree" &&  Minecraft.matrix[cloudPlace+1][cloudHeight+1]!="leaf" && Minecraft.matrix[cloudPlace+1][cloudHeight+1]!="rock" && Minecraft.matrix[cloudPlace+1][cloudHeight+2]!="tree" &&  Minecraft.matrix[cloudPlace+1][cloudHeight+2]!="leaf" && Minecraft.matrix[cloudPlace+1][cloudHeight+2]!="rock" && Minecraft.matrix[cloudPlace+1][cloudHeight+3]!="tree" &&  Minecraft.matrix[cloudPlace+1][cloudHeight+3]!="leaf" && Minecraft.matrix[cloudPlace+1][cloudHeight+3]!="rock"){
+        //     Minecraft.matrix[cloudPlace][cloudHeight]="white";
+        //     Minecraft.matrix[cloudPlace][cloudHeight+1]="white";
+        //     Minecraft.matrix[cloudPlace][cloudHeight+2]="white";
+        //     Minecraft.matrix[cloudPlace+1][cloudHeight+1]="white";
+        //     Minecraft.matrix[cloudPlace+1][cloudHeight+2]="white";
+        //     Minecraft.matrix[cloudPlace+1][cloudHeight+3]="white";
+        // }
+        Minecraft.matrix[3][3]="white";
+
+    },
 
 
     renderStartMatrix : function () {
@@ -201,6 +228,6 @@ var Minecraft = {
 
 
 var x = 15;
-var y = 500;
+var y = 20;
 
 Minecraft.init(x, y);
