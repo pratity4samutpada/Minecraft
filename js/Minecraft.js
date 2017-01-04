@@ -137,6 +137,16 @@ var Minecraft = {
         Minecraft.matrix[treePlace-1][g+1]="leaf";
         Minecraft.matrix[treePlace-1][g-1]="leaf";
         Minecraft.matrix[treePlace-2][g]="leaf";
+        // Case 3
+        if(Minecraft.matrix[treePlace][g-1]=="grass" && Minecraft.matrix[treePlace][g]=="grass" && Minecraft.matrix[treePlace][g+1]=="grass"  && Minecraft.matrix[treePlace-1][g]!="tree") {
+            Minecraft.matrix[treePlace-1][g]="leaf";
+            Minecraft.matrix[treePlace-1][g+1]="leaf";
+            Minecraft.matrix[treePlace-1][g-1]="leaf";
+            Minecraft.matrix[treePlace-2][g]="leaf";
+        }
+        // Case 2 left
+
+
 
     },
 
