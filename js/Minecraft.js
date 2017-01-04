@@ -58,6 +58,7 @@ var Minecraft = {
         for(var i=2*(x/3);i<y-1;i++){
             if(i%17==0){
                 Minecraft.makeTree(i);
+
             }
             if(i%11==0){
                 Minecraft.makeGrass(i);
@@ -65,9 +66,18 @@ var Minecraft = {
             if(i%13==0){
                 Minecraft.makeRock(i);
             }
+            if(i%37==0){
+                Minecraft.makeCloud1(i);
+            }
+            if(i%27==0){
+                Minecraft.makeCloud2(i);
+            }
+            if(i%21==0){
+                Minecraft.makeCloud3(i);
+            }
         }
 
-        Minecraft.makeCloud();
+
 
     },
 
@@ -197,21 +207,46 @@ var Minecraft = {
 
     },
 
-    makeCloud:function(){
-        // var cloudPlace=(x/3)-1;
-        // var cloudHeight=y/3;
-        // console.log("hwew=");
-        // if( Minecraft.matrix[cloudPlace][cloudHeight]!="tree" &&  Minecraft.matrix[cloudPlace][cloudHeight]!="leaf" && Minecraft.matrix[cloudPlace][cloudHeight]!="rock" && Minecraft.matrix[cloudPlace][cloudHeight+1]!="tree" &&  Minecraft.matrix[cloudPlace][cloudHeight+1]!="leaf" && Minecraft.matrix[cloudPlace][cloudHeight+1]!="rock" && Minecraft.matrix[cloudPlace][cloudHeight+2]!="tree" &&  Minecraft.matrix[cloudPlace][cloudHeight+2]!="leaf" && Minecraft.matrix[cloudPlace][cloudHeight+2]!="rock" && Minecraft.matrix[cloudPlace+1][cloudHeight+1]!="tree" &&  Minecraft.matrix[cloudPlace+1][cloudHeight+1]!="leaf" && Minecraft.matrix[cloudPlace+1][cloudHeight+1]!="rock" && Minecraft.matrix[cloudPlace+1][cloudHeight+2]!="tree" &&  Minecraft.matrix[cloudPlace+1][cloudHeight+2]!="leaf" && Minecraft.matrix[cloudPlace+1][cloudHeight+2]!="rock" && Minecraft.matrix[cloudPlace+1][cloudHeight+3]!="tree" &&  Minecraft.matrix[cloudPlace+1][cloudHeight+3]!="leaf" && Minecraft.matrix[cloudPlace+1][cloudHeight+3]!="rock"){
-        //     Minecraft.matrix[cloudPlace][cloudHeight]="white";
-        //     Minecraft.matrix[cloudPlace][cloudHeight+1]="white";
-        //     Minecraft.matrix[cloudPlace][cloudHeight+2]="white";
-        //     Minecraft.matrix[cloudPlace+1][cloudHeight+1]="white";
-        //     Minecraft.matrix[cloudPlace+1][cloudHeight+2]="white";
-        //     Minecraft.matrix[cloudPlace+1][cloudHeight+3]="white";
-        // }
-        Minecraft.matrix[3][3]="white";
+    makeCloud1:function(c){
+        var cloud_x=(x/5);
+
+        Minecraft.matrix[cloud_x][c]="white";
+        Minecraft.matrix[cloud_x][c+1]="white";
+        Minecraft.matrix[cloud_x][c+2]="white";
+        Minecraft.matrix[cloud_x+1][c+1]="white";
+        Minecraft.matrix[cloud_x+1][c+2]="white";
+        Minecraft.matrix[cloud_x+1][c+3]="white";
 
     },
+
+    makeCloud2:function(n){
+        var cloud_x=(x/5);
+        Minecraft.matrix[cloud_x][n]="white";
+        Minecraft.matrix[cloud_x][n+1]="white";
+        Minecraft.matrix[cloud_x][n+2]="white";
+        Minecraft.matrix[cloud_x][n+3]="white";
+        Minecraft.matrix[cloud_x][n+4]="white";
+        Minecraft.matrix[cloud_x-1][n-1]="white";
+        Minecraft.matrix[cloud_x-1][n]="white";
+        Minecraft.matrix[cloud_x-1][n+1]="white";
+        Minecraft.matrix[cloud_x-1][n+2]="white";
+        Minecraft.matrix[cloud_x-1][n+3]="white";
+        Minecraft.matrix[cloud_x+1][n+2]="white";
+        Minecraft.matrix[cloud_x-2][n+1]="white";
+
+    },
+
+    makeCloud3:function(z) {
+        var cloud_x=(x/5);
+        Minecraft.matrix[cloud_x][z]="white";
+        Minecraft.matrix[cloud_x][z+1]="white";
+        Minecraft.matrix[cloud_x][z+2]="white";
+        Minecraft.matrix[cloud_x][z+3]="white";
+        Minecraft.matrix[cloud_x-1][z+1]="white";
+        Minecraft.matrix[cloud_x+1][z+2]="white";
+    },
+
+
 
 
     renderStartMatrix : function () {
@@ -228,6 +263,6 @@ var Minecraft = {
 
 
 var x = 15;
-var y = 20;
+var y = 500;
 
 Minecraft.init(x, y);
