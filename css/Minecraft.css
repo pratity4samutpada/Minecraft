@@ -1,15 +1,20 @@
+body{
+    overflow-x: scroll;
+}
 
 .cell{
+
     height:30px;
     width:30px;
     display: inline-block;
-    border: 1px solid white;
 
 
 }
 
 .row{
     line-height: 0;
+
+
 
 }
 
@@ -21,10 +26,9 @@
     overflow-y: hidden;
     white-space: nowrap;
 
-
-
-
-
+}
+.white{
+    background-color: white;
 }
 
 .dirt{
