@@ -419,14 +419,14 @@ var Minecraft = {
 
     setupScroll: function () {
         var gridContainer = $("#gridContainer"), x;
-        $(".scroll").hover(function () {
+        $(".scroll").click(function () {
             if ($(this).hasClass("scrollRight")) {
-                x = ((gridContainer.width() / 5)) + gridContainer.scrollLeft();
+                x = ((gridContainer.width() / 3)) + gridContainer.scrollLeft();
                 gridContainer.animate({
                     scrollLeft: x,
                 })
             } else {
-                x = ((gridContainer.width() / 5)) - gridContainer.scrollLeft();
+                x = ((gridContainer.width() / 3)) - gridContainer.scrollLeft();
                 gridContainer.animate({
                     scrollLeft: -x,
                 })

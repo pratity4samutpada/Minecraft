@@ -152,8 +152,8 @@ html, body {
     white-space: nowrap;
     position: fixed;
     margin-left: 15%;
-    top: 5%;
-    border: 10px solid black;
+    top: 4%;
+    border: 10px solid blue;
     border-radius: 10px;
 
 }
@@ -171,19 +171,32 @@ html, body {
 
 .scroll{
     height:50%;
-    width:20px;
-    border:1px solid black;
+    width:2%;
+    background-color: gray;
+    vertical-align: middle;
+    box-sizing: border-box;
+    border:1px solid white;
+    border-radius: 5px;
+    top: 35%;
+    opacity: .5;
+
+
+}
+
+.scroll:hover{
+    border: 3px solid white;
+    opacity:1;
 
 }
 
 #scrollLeft{
-    left:110px;
+    left:119px;
     position: fixed;
 
 }
 
 #scrollRight{
-    right:5px;
+    right:15px;
     position:fixed;
     display:inline-block;
 }
