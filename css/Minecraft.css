@@ -1,136 +1,142 @@
-html,body{
-    height:100%;
-    width:100%;
-    margin:0;
-    padding:0;
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-.cell{
-    height:30px;
-    width:30px;
+.cell {
+    height: 30px;
+    width: 30px;
     display: inline-block;
 
-
-}
-.cell:hover{
-    opacity:.7;
-    background-color:lightblue;
 }
 
+.cell:hover {
+    opacity: .7;
+    background-color: lightblue;
+}
 
-.row{
+.row {
     line-height: 0;
 
 }
 
-#menu.active{
-    position:fixed;
-    height:200px;
-    width:100%;
-    right:0;
+#menu.active {
+    position: fixed;
+    height: 15%;
+    width: 100%;
+    right: 0;
     background-color: black;
-    z-index:10;
-
 
 }
 
-
-#grid{
-    display:inline-block;
+#grid {
+    display: inline-block;
     background-color: deepskyblue;
     width: auto;
     overflow-x: scroll;
     white-space: nowrap;
-    overflow-y:hidden;
+    overflow-y: hidden;
+    bottom: 0;
+    position: absolute;
 }
-.white{
+
+.white {
     background-color: white;
 
 }
 
-.dirt{
-    background-image:url("../images/dirt.png");
-    background-size:cover;
-    background-repeat:no-repeat;
+.dirt {
+    background-image: url("../images/dirt.png");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-.grass{
-    background-image:url("../images/grass.png");
-    background-size:cover;
-    background-repeat:no-repeat;
+.grass {
+    background-image: url("../images/grass.png");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-.rock{
-    background-image:url("../images/rock.png");
-    background-size:cover;
-    background-repeat:no-repeat;
+.rock {
+    background-image: url("../images/rock.png");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-.leaf{
-    background-image:url("../images/leaf.png");
-    background-size:cover;
-    background-repeat:no-repeat;
+.leaf {
+    background-image: url("../images/leaf.png");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-.tree{
-    background-image:url("../images/tree.png");
-    background-size:cover;
-    background-repeat:no-repeat;
+.tree {
+    background-image: url("../images/tree.png");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-#axe{
-    background-image:url("../images/axe.png");
-    background-size:cover;
-    background-repeat:no-repeat;
+#axe {
+    background-image: url("../images/axe.png");
 }
 
-#pickaxe{
-    background-image:url("../images/pickaxe.png");
-    background-size:cover;
-    background-repeat:no-repeat;
+#pickaxe {
+    background-image: url("../images/pickaxe.png");
+
 }
 
-#shovel{
-    background-image:url("../images/shovel.png");
-    background-size:cover;
-    background-repeat:no-repeat;
+#shovel {
+    background-image: url("../images/shovel.png");
+
 }
 
-.tool{
-    height:90%;
-    width:90%;
+.tool {
+    height: 100%;
+    width: 100%;
     display: inline-block;
     border-radius: 5%;
-
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 
 }
 
-.selected{
-    border:5px solid blue;
+.selected {
+    border: 5px solid blue;
     box-sizing: border-box;
 
 }
 
-
-.wrongTool{
-    border:8px solid red;
+.wrongTool {
+    border: 8px solid red;
     box-sizing: border-box;
 }
 
-.toolContainer{
-    height:110px;
-    width:110px;
-    display:inline-block;
-    background-color: white;
+.toolContainer {
+    height: 100%;
+    width: 10%;
+    display: inline-block;
+    background-color: transparent;
     vertical-align: top;
 
 }
 
-.counter{
-    margin:0;
-    color:white;
-    font-size:25px;
-    background-color: black;
-    border-radius: 10%;
+.counter {
+    margin: 0;
+    color: white;
+    font-size: 400%;
+
+}
+
+.bigToolContainer {
+    background-color: aliceblue;
+    width: 75%;
+    height: 80%;
+    margin: 0 auto;
+    text-align: center;
+    border: 3px solid forestgreen;
+    position: relative;
+    top: 2%;
 }
 
