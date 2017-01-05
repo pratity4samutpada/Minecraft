@@ -3,6 +3,7 @@ html, body {
     width: 100%;
     margin: 0;
     padding: 0;
+    background-color: black;
 }
 
 .cell {
@@ -27,7 +28,7 @@ html, body {
     height: 15%;
     width: 100%;
     right: 0;
-    background-color: black;
+    background-color: white;
 
 }
 
@@ -40,6 +41,7 @@ html, body {
     overflow-y: hidden;
     bottom: 0;
     position: absolute;
+    margin-left: 8%;
 }
 
 .white {
@@ -96,10 +98,16 @@ html, body {
     width: 100%;
     display: inline-block;
     border-radius: 5%;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 
+
+}
+
+#axe,#shovel,#pickaxe{
+    background-size: contain;
+    background-color: whitesmoke;
 }
 
 .selected {
@@ -115,28 +123,45 @@ html, body {
 
 .toolContainer {
     height: 100%;
-    width: 10%;
-    display: inline-block;
-    background-color: transparent;
+    width: 65%;
+    display: block;
+    background-color: black;
     vertical-align: top;
-
+    border: 5px solid black;
 }
 
 .counter {
     margin: 0;
     color: white;
-    font-size: 400%;
+    font-size: 350%;
+    cursor: pointer;
 
 }
 
 .bigToolContainer {
-    background-color: aliceblue;
-    width: 75%;
-    height: 80%;
-    margin: 0 auto;
+    width: 10%;
+    height: 70%;
     text-align: center;
-    border: 3px solid forestgreen;
-    position: relative;
+    position: absolute;
     top: 2%;
+
+
 }
 
+.miniMapCell{
+    height:5px;
+    width:5px;
+    display:inline-block;
+}
+
+#miniMap{
+    display: inline-block;
+    background-color: deepskyblue;
+    width: auto;
+    white-space: nowrap;
+    position:fixed;
+    margin-left:15%;
+    top:5%;
+    border:10px solid black;
+    border-radius: 10px;
+}

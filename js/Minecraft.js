@@ -7,13 +7,15 @@ var Minecraft = {
         dirt: 0,
         grass: 0,
         maxInventory: 10,
-
+        
         init: function (x, y) {
             Minecraft.drawGrid(x, y);
             Minecraft.buildMatrix(x, y);
             Minecraft.makeStartMatrix();
             Minecraft.renderStartMatrix();
             Minecraft.populateMenu();
+            Minecraft.drawMiniMap(x, y);
+            Minecraft.renderMiniMap();
 
         },
 
@@ -79,6 +81,7 @@ var Minecraft = {
                 Minecraft.matrix[target.data("i")][target.data("j")] = Minecraft.selected;
                 target.addClass(Minecraft.selected);
                 Minecraft.subtractInventory(Minecraft.selected);
+                Minecraft.renderMiniMap();
             } else {
                 Minecraft.wrongTool(Minecraft.selected);
             }
@@ -86,7 +89,7 @@ var Minecraft = {
         },
 
         checkResourcePosition: function (target) {
-            var checkSiblings =(Minecraft.matrix[target.data("i") + 1][target.data("j")] != undefined) || (Minecraft.matrix[target.data("i") ][target.data("j")+1] != undefined) || (Minecraft.matrix[target.data("i")][target.data("j")-1] != undefined);
+            var checkSiblings = (Minecraft.matrix[target.data("i") + 1][target.data("j")] != undefined) || (Minecraft.matrix[target.data("i")][target.data("j") + 1] != undefined) || (Minecraft.matrix[target.data("i")][target.data("j") - 1] != undefined);
             return (checkSiblings && Minecraft.matrix[target.data("i")][target.data("j")] === undefined );
 
 
@@ -102,11 +105,13 @@ var Minecraft = {
                 Minecraft.matrix[target.data("i")][target.data("j")] = undefined;
                 target.removeClass("tree");
                 Minecraft.addInventory("tree");
+                Minecraft.renderMiniMap();
             }
             else if (target.hasClass("leaf") && Minecraft.checkToolPosition(target)) {
                 Minecraft.matrix[target.data("i")][target.data("j")] = undefined;
                 target.removeClass("leaf");
                 Minecraft.addInventory("leaf");
+                Minecraft.renderMiniMap();
 
             } else {
                 Minecraft.wrongTool(Minecraft.selected);
@@ -118,11 +123,13 @@ var Minecraft = {
                 Minecraft.matrix[target.data("i")][target.data("j")] = undefined;
                 target.removeClass("grass");
                 Minecraft.addInventory("grass");
+                Minecraft.renderMiniMap();
             }
             else if (target.hasClass("dirt") && Minecraft.checkToolPosition(target)) {
                 Minecraft.matrix[target.data("i")][target.data("j")] = undefined;
                 target.removeClass("dirt");
                 Minecraft.addInventory("dirt");
+                Minecraft.renderMiniMap();
             }
 
             else {
@@ -137,6 +144,7 @@ var Minecraft = {
                 Minecraft.matrix[target.data("i")][target.data("j")] = undefined;
                 target.removeClass("rock");
                 Minecraft.addInventory("rock");
+                Minecraft.renderMiniMap();
 
             } else {
                 Minecraft.wrongTool(Minecraft.selected);
@@ -403,6 +411,48 @@ var Minecraft = {
 
         }
         ,
+        renderMiniMap: function () {
+            Minecraft.miniCell
+                .removeClass("leaf")
+                .removeClass("rock")
+                .removeClass("tree")
+                .removeClass("grass")
+                .removeClass("dirt");
+
+            for (var i = 0; i < Minecraft.matrix.length; i++) {
+                for (var j = 0; j < Minecraft.matrix[i].length; j++) {
+                    Minecraft.miniCell.eq(i * y + j).addClass(Minecraft.matrix[i][j]);
+                }
+
+            }
+        }
+        ,
+        drawMiniMap: function (x, y) {
+            // we create our grid
+            for (var i = 0; i < x; i++) {
+                var row = $("<div/>");
+                row.addClass("row");
+                $("#miniMap").append(row);
+                for (var j = 0; j < y; j++) {
+                    var cell = $("<div/>");
+                    cell.addClass("miniMapCell");
+                    row.append(cell);
+
+
+                }
+            }
+
+            Minecraft.miniCell = $(".miniMapCell");
+            for (var i = 0; i < Minecraft.matrix.length; i++) {
+                for (var j = 0; j < Minecraft.matrix[i].length; j++) {
+                    Minecraft.miniCell.eq(i * y + j)
+                        .data("i", i)
+                        .data("j", j);
+                }
+            }
+
+        }
+        ,
 
 
         renderStartMatrix: function () {
@@ -415,11 +465,9 @@ var Minecraft = {
         }
 
 
-    }
-    ;
+    };
 
 
 var x = 15;
 var y = 200;
-
 Minecraft.init(x, y);
