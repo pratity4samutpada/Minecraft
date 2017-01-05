@@ -1,6 +1,4 @@
 html, body {
-    height: 100%;
-    width: 100%;
     margin: 0;
     padding: 0;
     background-color: black;
@@ -36,12 +34,7 @@ html, body {
     display: inline-block;
     background-color: deepskyblue;
     width: auto;
-    overflow-x: scroll;
-    white-space: nowrap;
-    overflow-y: hidden;
-    bottom: 0;
-    position: absolute;
-    margin-left: 8%;
+
 }
 
 .white {
@@ -102,10 +95,9 @@ html, body {
     background-repeat: no-repeat;
     background-position: center;
 
-
 }
 
-#axe,#shovel,#pickaxe{
+#axe, #shovel, #pickaxe {
     background-size: contain;
     background-color: whitesmoke;
 }
@@ -145,23 +137,53 @@ html, body {
     position: absolute;
     top: 2%;
 
-
 }
 
-.miniMapCell{
-    height:5px;
-    width:5px;
-    display:inline-block;
+.miniMapCell {
+    height: 5px;
+    width: 5px;
+    display: inline-block;
 }
 
-#miniMap{
+#miniMap {
     display: inline-block;
     background-color: deepskyblue;
     width: auto;
     white-space: nowrap;
-    position:fixed;
-    margin-left:15%;
-    top:5%;
-    border:10px solid black;
+    position: fixed;
+    margin-left: 15%;
+    top: 5%;
+    border: 10px solid black;
     border-radius: 10px;
+
+}
+
+#gridContainer {
+    border: 10px solid blue;
+    bottom: 0;
+    position: absolute;
+    width: 90%;
+    overflow-x: scroll;
+    white-space: nowrap;
+    overflow-y: hidden;
+    margin-left: 8%;
+}
+
+.scroll{
+    height:50%;
+    width:20px;
+    border:1px solid black;
+
+}
+
+#scrollLeft{
+    left:110px;
+    position: fixed;
+
+}
+
+#scrollRight{
+    right:5px;
+    position:fixed;
+    display:inline-block;
 }
