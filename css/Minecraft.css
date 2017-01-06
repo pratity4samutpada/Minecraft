@@ -160,6 +160,7 @@ html, body {
 
 #gridContainer {
     border: 10px solid blue;
+    border-radius: 10px;
     bottom: 0;
     position: absolute;
     width: 90%;
