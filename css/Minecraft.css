@@ -3,7 +3,15 @@ html, body {
     padding: 0;
     background-color: black;
 }
+.landing_page{
+    background-image: url("../images/tree.png");
+    background-size: cover;
+    background-repeat:repeat;
+    height:700px;
+    width:100%;
+    text-align: center;
 
+}
 .cell {
     height: 30px;
     width: 30px;
@@ -201,3 +209,19 @@ html, body {
     position:fixed;
     display:inline-block;
 }
+
+#gridContainer{
+    display:none;
+}
+
+#menu{
+    display:none;
+}
+
+.btn{
+    background-color: darkgray;
+    text-align:center;
+    font-size: 35px;
+    margin: auto;
+}
+

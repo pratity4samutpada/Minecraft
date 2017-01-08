@@ -1,3 +1,6 @@
+var x = 15;
+var y = 200;
+
 var Minecraft = {
 
     selected: "",
@@ -8,7 +11,9 @@ var Minecraft = {
     grass: 0,
     maxInventory: 10,
 
+
     init: function (x, y) {
+        Minecraft.landingPage();
         Minecraft.drawGrid(x, y);
         Minecraft.buildMatrix(x, y);
         Minecraft.makeStartMatrix();
@@ -476,8 +481,7 @@ var Minecraft = {
             }
         }
 
-    }
-    ,
+    },
 
 
     renderStartMatrix: function () {
@@ -487,12 +491,18 @@ var Minecraft = {
             }
         }
 
+    },
+
+    landingPage: function(){
+        $("#landing_page").css("display","none");
+        $("#gridContainer").css("display","block");
+        $("#menu").css("display","block");
     }
+
 
 
 };
 
 
-var x = 15;
-var y = 200;
-Minecraft.init(x, y);
+
+// Minecraft.init(x, y);
